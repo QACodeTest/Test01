@@ -25,14 +25,14 @@ describe('Twitter -', function () {
     });
 
 
-  it ("user can post a tweet and Tweets count should increment.", function() {
+  it ("user can post a tweet and Tweets count should be incremented.", function() {
 
   
     var vTweets = browser.driver.findElement(by.css('span.ProfileCardStats-statValue')).getAttribute("data-count");
 
     browser.driver.findElement(by.css('button.js-global-new-tweet.js-tooltip.EdgeButton.EdgeButton--primary.js-dynamic-tooltip')).click();
     
-    browser.driver.findElement(by.css('div#tweet-box-global.tweet-box.rich-editor.is-showPlaceholder')).sendKeys(" Auto Tweet" + Date.now() );
+    browser.driver.findElement(by.css('div#tweet-box-global.tweet-box.rich-editor.is-showPlaceholder')).sendKeys(" Auto Tweet " + Date.now() );
     
     browser.sleep(3000);
 
@@ -52,7 +52,7 @@ describe('Twitter -', function () {
    });
   
 
-  it ("User can delete a Tweet", function() {
+  xit ("User can delete a Tweet", function() {
     
     
     browser.sleep(3000);
