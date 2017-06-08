@@ -1,65 +1,88 @@
 
 describe('Twitter -', function () {
 
-  //browser.waitForAngularEnabled(false);
-  var util = require('util');
-  //var element = browser.element;
-
+   var util = require('util');
+  
  it ("Open Twitter web site", function() {
+
 	 browser.waitForAngularEnabled(false);
    browser.get('https://twitter.com/login' );
    expect(browser.getCurrentUrl()).toMatch('/twitter');
-    });
+   });
  
- it ("login to Twitter account", function() {
-    //Failed: no such element: Unable to locate element: {"method":"css selector","selector":"#input.text-input.email-input.js-signin-email"}
-	  browser.waitForAngularEnabled(false);
-    browser.sleep(5000);
+
+ it ("user can successfully login to Twitter", function() {
+
+    browser.waitForAngularEnabled(false);
     browser.driver.findElement(by.css('fieldset input.js-username-field.email-input.js-initial-focus')).sendKeys("QACodeTest");
     browser.driver.findElement(by.css('fieldset input.js-password-field')).sendKeys("qacodetest123");
     browser.driver.findElement(by.css('button.submit.btn.primary-btn')).click(); 
-    browser.sleep(10000);
-    //$('input[name="session[username_or_email]"]').val("Hello1");
-     
-    //browser.driver.findElement(By.cssSelector('.text-input.email-input.js-signin-email')).sendKeys("QACodeTest");
-     //browser.driver.findElement(by.css('text-input')).sendKeys("qacodetest123");
-     //browser.driver.findElement(by.name('submit btn primary-btn js-submit')).click();   
+    
     });
 
- // it ("Add a Tweet", function() {
- //    browser.waitForAngularEnabled(false);
- //     //Failed: browser.driver.findElement(...).sendkeys is not a function
- //   // count the number tweets
- //    //beforeTweet = browser.driver.findElement(by.class('ProfileCardStats-statValue')).toContain()
- //    browser.driver.findElement(by.css('#global-new-tweet-button > span.text')).click();
- //    //browser.driver.findElement(by.id('lobal-new-tweet-button')).click(); 
- //    browser.driver.findElement(by.css('#tweet-box-global')).sendkeys("Tweet 1")
- //    browser.driver.findElement(by.className('button-text tweeting-text')).click();
- //    //Refresh and count the tweets - should be tweet 
- //   });
+
+  it ("user can post a tweet and Tweets count should increment.", function() {
+
+    browser.waitForAngularEnabled(false);
+  
+    var vTweets = browser.driver.findElement(by.css('span.ProfileCardStats-statValue')).getAttribute("data-count");
+
+    browser.driver.findElement(by.css('button.js-global-new-tweet.js-tooltip.EdgeButton.EdgeButton--primary.js-dynamic-tooltip')).click();
     
- // it ("Validate Tweet counts", function() {
- //    browser.waitForAngularEnabled(false);
- //   // count the number tweets
- //    //AfterTweet = beforeTweet
- //    //Refresh and count the tweets - should be tweet 
- //   });
+    browser.driver.findElement(by.css('div#tweet-box-global.tweet-box.rich-editor.is-showPlaceholder')).sendKeys(" Auto Tweet 29");
+  
+    browser.sleep(3000);
 
- // it ("Delete a Tweet", function() {
- //   //Failed: no such element: Unable to locate element: {"method":"css selector","selector":"*[id="menu-0"]"}
- //    browser.waitForAngularEnabled(false);
- //    browser.driver.findElement(by.id('menu-0')).click();
- //    browser.driver.findElement(by.css('li.js-actionDelete > button.dropdown-link')).click();
- //    //browser.driver.findElement(by.className('btn primary-btn delete-action')).click();
- //    browser.driver.findElement(by.css('button.btn.primary-btn.delete-action')).click();
- //   });   
+    //var i=0;
+    var element = browser.element;
+    element.all(by.css('.tweet-action.EdgeButton.EdgeButton--primary.js-tweet-btn')).get(1).click();
+
+    browser.sleep(3000);
+    //when user posts a tweet - Tweets count should increments
+    browser.driver.navigate().refresh();
+
+    browser.sleep(1000);
+
+    var vAddTweets = browser.driver.findElement(by.css('span.ProfileCardStats-statValue')).getAttribute("data-count");
+
+    expect(vAddTweets).not.toEqual(vTweets);
    
- // it ("Search Tweet", function() {
- //  // Failed: browser.driver.findElement(...).sendkeys is not a function
- //    browser.waitForAngularEnabled(false);
- //    browser.driver.findElement(by.id('search-query')).sendkeys("Elon")
- //    browser.driver.findElement(by.className('Icon Icon--medium Icon--search nav-search')).click();
- //    expet(browser.driver.findElement(by.css('div.SearchEmptyTimeline-emptyTitle'))).tobe(false)
- //   }); 
+   });
+  
 
+  it ("User can delete a Tweet", function() {
+    
+    browser.waitForAngularEnabled(false);
+    var element = browser.element;
+
+    browser.sleep(3000);
+    element.all(by.css('span.ProfileCardStats-statValue')).get(0).click();
+    
+    browser.sleep(3000);
+    element.all(by.css('button.ProfileTweet-actionButton.u-textUserColorHover.dropdown-toggle.js-dropdown-toggle')).get(0).click();
+
+    browser.sleep(3000);
+    element(by.cssContainingText('button.dropdown-link' , 'Delete Tweet')).click();
+
+    browser.sleep(5000);
+    browser.driver.findElement(by.css('button.btn.primary-btn.delete-action')).click();
+   
+   });   
+
+   
+ it ("User can search tweets.", function() {
+  
+    browser.waitForAngularEnabled(false);
+
+ 
+    browser.driver.findElement(by.css('input.search-input')).sendKeys("Elon");
+    
+    browser.driver.findElement(by.css('button.Icon.Icon--medium.Icon--search.nav-search')).click();
+
+    var element = browser.element;
+    expect(element(by.css('.SearchEmptyTimeline-emptyTitle')).isPresent()).toBe(false);
+
+   });
+
+     
   });
