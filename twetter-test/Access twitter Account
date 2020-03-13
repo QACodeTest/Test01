@@ -1,0 +1,9 @@
+
+Var webdriver = require(‘selenium-webdriver’);
+
+Var driver = new webdriver.builder().
+                    withCapabilites(webdriver. Capabilites.chrome())
+                     .build();
+
+driver.get('https://twitter.com/');
+

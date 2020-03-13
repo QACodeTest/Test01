@@ -1,0 +1,11 @@
+
+
+var webdriver = require('selenium-webdriver'),
+
+var driver = new webdriver.builder().
+                   withCapabilites(webdriver. Capabilites.chrome())
+                    .build();
+
+driver.get('https://twitter.com/login');
+
+

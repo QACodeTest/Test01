@@ -17,13 +17,18 @@ describe('Twitter -', function () {
 
  it ("user can successfully login to Twitter", function() {
 
-    browser.driver.findElement(by.css('fieldset input.js-username-field.email-input.js-initial-focus')).sendKeys("QACodeTest");
-    browser.driver.findElement(by.css('fieldset input.js-password-field')).sendKeys("qacodetest123");
+    //browser.driver.findElement(by.css('fieldset input.js-username-field.email-input.js-initial-focus')).sendKeys("QACodeTest");
+    browser.driver.findElement(by.css('css-1dbjc4n r-1u4rsef r-rull8r r-wgabs5 r-1awa8pu r-1jkafct')).sendKeys("QACodeTest");
+    //browser.driver.findElement(by.css('fieldset input.js-password-field')).sendKeys("qacodetest123");
+    browser.driver.findElement(by.css('css-901oao r-1awozwy r-k200y r-hkyrab r-6koalj r-1qd0xha r-1b6yd1w r-16dba41 r-ad9z0x r-bcqeeo r-13qz1uu r-qvutc0')).sendKeys("qacodetest123");
+    
     browser.driver.findElement(by.css('button.submit.btn.primary-btn')).click(); 
     expect(element(by.css('.tweet-action.EdgeButton.EdgeButton--primary.js-tweet-btn')).isPresent()).toBe(true);
+ 
   
     });
 
+    /*
 
   it ("user can post a tweet and Tweets count should be incremented.", function() {
 
@@ -52,19 +57,19 @@ describe('Twitter -', function () {
    });
   
 
-  xit ("User can delete a Tweet", function() {
+   it ("User can delete a Tweet", function() {
     
     
     browser.sleep(3000);
     element.all(by.css('span.ProfileCardStats-statValue')).get(0).click();
     
-    browser.sleep(3000);
+    //browser.sleep(3000);
     element.all(by.css('button.ProfileTweet-actionButton.u-textUserColorHover.dropdown-toggle.js-dropdown-toggle')).get(0).click();
 
     browser.sleep(3000);
     element(by.cssContainingText('button.dropdown-link' , 'Delete Tweet')).click();
 
-    browser.sleep(10000);
+    browser.sleep(5000);
     browser.driver.findElement(by.css('button.btn.primary-btn.delete-action')).click();
    
    });   
@@ -81,7 +86,9 @@ describe('Twitter -', function () {
     var element = browser.element;
     expect(element(by.css('.SearchEmptyTimeline-emptyTitle')).isPresent()).toBe(false);
 
-   });
+   
 
+   });
+   */
      
   });
